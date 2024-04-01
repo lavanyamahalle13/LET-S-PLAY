@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Her Out</title>
+<link rel="stylesheet" href="Love.css" />
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: pink;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.5em;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        display: inline-block;
+        transition: transform 0.3s ease-in-out;
+        border: 4px solid black;
+        font-style: italic;
+        font-size: 3rem;
+        color: darkred;
+    }
+
+    h1:hover {
+        transform: scale(1.1);
+    }
+
+    .message1 {
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 150px;
+        border: 4px solid black;
+        font-style: italic;
+        font-size:2rem;
+        color: darkred;
+    }
+
+    .message2 {
+        position: absolute;
+        top: 70%;
+        bottom: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .class {
+        margin: 20rem;
+    }
+
+    button {
+        font-weight: bold;
+        border: 2px solid #007bff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: transparent;
+        color: #007bff;
+        cursor: pointer;
+        margin-left: 15rem;
+        margin-top: 80px;
+    }
+
+    button:hover {
+        color: #fff;
+    }
+
+    /* Responsive styles */
+    @media only screen and (max-width: 768px) {
+        .class {
+            margin: 10rem;
+        }
+
+        button {
+            margin-left: 0;
+        }
+
+        .message1 {
+            margin-bottom: 100px;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        h1 {
+            font-size: 1.5em;
+        }
+
+        .message1 {
+            font-size: 0.8rem;
+        }
+
+        .message2 {
+            font-size: 0.8rem;
+        }
+
+        button {
+            padding: 8px 16px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="class">
+        <div class="container">
+            <div
+              class="tenor-gif-embed"
+              data-postid="253027946666209433"
+              data-share-method="host"
+              data-aspect-ratio="1.37853"
+              data-width="100%"
+            >
+              <a
+                href="https://tenor.com/view/mochi-cat-mochi-and-goma-goma-and-peach-mochi-mochi-peach-cat-gif-gif-253027946666209433"
+                >Mochi Cat GIF</a
+              >from <a href="https://tenor.com/search/mochi-gifs">Mochi GIFs</a>
+            </div>
+            <script
+              type="text/javascript"
+              async
+              src="https://tenor.com/embed.js"
+            ></script>
+            <h1 class=""> Fuck this game ...come on 😘</h1>
+          </div>
+          <h1 class="message1">HEYY, seriously ..are we still playing this game🙄</h1>
+          <button onclick="playSong()">Play Song</button>
+          <audio id="myAudio">
+              <source src="hates.mp3" type="audio/mp3">
+              Your browser does not support the audio element.
+          </audio>
+    </div>
+ 
+    <script>
+        function playSong() {
+            var audio = document.getElementById("myAudio");
+            audio.play();
+        }
+    </script>
+</body>
+</html>

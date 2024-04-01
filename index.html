@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Image</title>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+        margin: 0;
+        overflow: hidden; /* Prevent scrolling */
+        background-color: pink;
+    }
+
+    .image-container {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: transform 1s ease-in-out, top 1s ease-in-out, left 1s ease-in-out, border 0.5s;
+        border: 5px solid transparent;
+        border-radius: 10px;
+    }
+
+    .img-selected {
+        border-color: #ff00ff; /* Beautiful border color */
+        transform: translate(-50%, -50%) scale(1.5); /* Increase size of selected image */
+    }
+
+    .heart {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-image: url('heart.png');
+        background-size: cover;
+        opacity: 0;
+        transition: opacity 0.5s;
+    }
+
+    .heart.centered {
+        opacity: 1;
+    }
+
+    .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        color: #333;
+    }
+
+    .button-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    button {
+        margin-right: 10px; /* Add margin between the buttons */
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+</style>
+</head>
+<body>
+
+<h1 id="score" style="text-align: center;">Score: 0</h1>
+<div class="image-container" id="imageContainer"></div>
+<div class="heart"></div>
+<div class="loading" id="loading">Loading...</div>
+<div class="button-container">
+    <button id="stopButton">Stop</button>
+    <button id="restartButton">Restart</button>
+</div>
+
+<audio id="audio" >
+    <source src="nakh.mp3.mp3" type="audio/mp3"> <!-- Default audio file URL -->
+</audio>
+
+<script>
+    const imageFiles = [
+    
+           'chick kiss.jpg',
+           'forehead.jpg',
+           'frenchkiss.jpg',
+           'hug.jpg',
+
+           
+        // Add more image file URLs here
+    ];
+
+    const audioFiles = [
+        'nakh.mp3.mp3',
+        'ring1.mp3',
+        'man.mp3',
+        'Hua Main Ringtone Download – Animal - MobCup.Com.Co.mp3 ',
+       
+        // Add more audio file URLs here
+    ];
+
+    const audio = document.getElementById('audio');
+    const stopButton = document.getElementById('stopButton');
+    const restartButton = document.getElementById('restartButton');
+    const heart = document.querySelector('.heart');
+    const loading = document.getElementById('loading');
+    const scoreDisplay = document.getElementById('score');
+    let isStopped = false;
+    let intervalId;
+    let selectedImage;
+    let score = 0;
+
+    function getRandomAudio() {
+        const randomIndex = Math.floor(Math.random() * audioFiles.length);
+        return audioFiles[randomIndex];
+    }
+
+    function getRandomImage() {
+        const randomIndex = Math.floor(Math.random() * imageFiles.length);
+        return imageFiles[randomIndex];
+    }
+
+    function moveImages() {
+        const allImages = document.querySelectorAll('img');
+        allImages.forEach(img => {
+            const randomTop = Math.random() * (window.innerHeight - img.clientHeight);
+            const randomLeft = Math.random() * (window.innerWidth - img.clientWidth);
+            img.style.top = `${randomTop}px`;
+            img.style.left = `${randomLeft}px`;
+        });
+    }
+
+    function rotateImage() {
+        if (!isStopped) {
+            const imageUrl = getRandomImage();
+            const imgElement = document.createElement('img');
+            imgElement.src = imageUrl;
+            imgElement.alt = 'Random Image';
+            imageContainer.appendChild(imgElement);
+            moveImages();
+            setTimeout(() => {
+                rotateImage();
+            }, 0.2); // Change image after 2 seconds
+        }
+    }
+
+    stopButton.addEventListener('click', () => {
+        isStopped = true;
+        clearInterval(intervalId); // Use clearInterval to stop the rotation
+        const allImages = document.querySelectorAll('img');
+        const randomIndex = Math.floor(Math.random() * allImages.length);
+        selectedImage = allImages[randomIndex];
+        allImages.forEach(img => {
+            if (img !== selectedImage) {
+                img.remove();
+            }
+        });
+        selectedImage.style.top = '50%';
+        selectedImage.style.left = '50%';
+        selectedImage.classList.add('img-selected'); // Add beautiful border and increase size
+        heart.classList.add('centered');
+
+        // Change audio
+        audio.src = getRandomAudio();
+        audio.play();
+
+        // Update score
+        score++;
+        scoreDisplay.textContent = `Score: ${score}`;
+
+        // Redirect to another page if score is 4
+        if (score === 4) {
+            window.location.href = 'fuck.html'; // Change URL to the desired page
+        }
+    });
+
+    restartButton.addEventListener('click', () => {
+        isStopped = false;
+        imageContainer.innerHTML = '';
+        heart.classList.remove('centered');
+        rotateImage();
+        // Pause audio
+        audio.pause();
+    });
+
+    window.onload = () => {
+        loading.style.display = 'none';
+        rotateImage();
+    };
+</script>
+</body>
+</html>
